@@ -1,0 +1,36 @@
+﻿<Window x:Class="GameOfLife.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Game of life"  Height="761" Width="864.5">
+    <!-- <StackPanel Name="StackObject"> -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Name="LifeGrid" ShowGridLines="False" Margin="68,49,70,10" Width="600" Grid.Row="1" Background="Black" Height="600">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="333*"/>
+                <ColumnDefinition Width="268*"/>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+        <ToggleButton x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="25,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Checked="StartPressed"/>
+        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Left" Margin="229,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="ResetClicked"/>
+        <RadioButton x:Name="radioPer" GroupName="Conditions" IsChecked="True" Content="Periodical" HorizontalAlignment="Left" Margin="322,13,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <RadioButton x:Name="nonRadio" GroupName="Conditions" Content="Non-periodical" HorizontalAlignment="Left" Margin="413,13,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Slider x:Name="delaySlider" HorizontalAlignment="Left" Margin="545,12,0,0" Grid.Row="1" VerticalAlignment="Top" Width="148" Minimum="10" Maximum="1000" SmallChange="10" IsSnapToTickEnabled="True" Value="100"/>
+        <TextBlock x:Name="Delay" Text="{Binding Value, ElementName=delaySlider}" Margin="697,10,1,592" Grid.Row="1"/>
+        <ComboBox HorizontalAlignment="Left" Margin="113,10,0,0" VerticalAlignment="Top" Width="101" Grid.RowSpan="2" Height="20">
+            <ComboBoxItem x:Name="gliderItem" Content="Glider" HorizontalAlignment="Left" Width="92" Selected="GliderItem_Selected"/>
+            <ComboBoxItem x:Name="oscylatorItem" Content="Oscylator" HorizontalAlignment="Left" Width="92" Selected="OscylatorItem_Selected"/>
+            <ComboBoxItem x:Name="niezmienneItem" Content="Niezmienne" HorizontalAlignment="Left" Width="92" Selected="NiezmienneItem_Selected"/>
+            <ComboBoxItem x:Name="losowyItem" Content="Losowy" HorizontalAlignment="Left" Width="92" Selected="ComboBoxItem_Selected"/>
+        </ComboBox>
+        <TextBox x:Name="widthBox" HorizontalAlignment="Left" Height="22" Margin="292,53,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Szerokość" VerticalAlignment="Top" Width="76"/>
+        <TextBox x:Name="heightBox" HorizontalAlignment="Left" Height="22" Margin="373,53,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Wysokość" VerticalAlignment="Top" Width="76"/>
+        <Button Content="Zmień rozmiar" HorizontalAlignment="Left" Margin="456,53,0,0" Grid.Row="1" VerticalAlignment="Top" Width="82" Click="Button_Click" Height="22"/>
+    </Grid>
+    <!-- </StackPanel>-->
+</Window>

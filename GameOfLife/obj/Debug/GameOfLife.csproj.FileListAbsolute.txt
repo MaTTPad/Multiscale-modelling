@@ -1,0 +1,28 @@
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.csprojAssemblyReference.cache
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\App.g.cs
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife_MarkupCompile.cache
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.g.resources
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.Properties.Resources.resources
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.cache
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\MainWindow.baml
+C:\Users\Mateusz\Downloads\Game-of-Life-master\Game-of-Life-master\GameOfLife\obj\Debug\MainWindow.g.cs
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.csprojAssemblyReference.cache
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\MainWindow.baml
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\MainWindow.g.cs
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\App.g.cs
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife_MarkupCompile.cache
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.g.resources
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.Properties.Resources.resources
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.cache
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\Mateusz\Documents\Visual Studio 2019\GameOfLife\obj\Debug\GameOfLife.pdb
