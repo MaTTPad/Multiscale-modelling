@@ -23,14 +23,14 @@ namespace GameOfLife
             int gridWidth = 600;
             int gridHeight = 600;
 
-            for (int i = 0; i < gridHeight / 20; i++)
+            for (int i = 0; i < gridHeight / 5; i++)
             {
                 RowDefinition row = new RowDefinition();
                 LifeGrid.RowDefinitions.Add(row);
 
             }
 
-            for (int i = 0; i < gridWidth / 20; i++)
+            for (int i = 0; i < gridWidth / 5; i++)
             {
                 ColumnDefinition column = new ColumnDefinition();
                 LifeGrid.ColumnDefinitions.Add(column);
@@ -93,8 +93,8 @@ namespace GameOfLife
                 int gridWidth = (int)LifeGrid.Width;
                 int gridHeight = (int)LifeGrid.Height;
 
-                var maxRow = gridHeight / 20;
-                var maxCol = gridWidth / 20;
+                var maxRow = gridHeight / 5;
+                var maxCol = gridWidth / 5;
 
 
                 foreach (Cell cell in LifeGrid.Children)
@@ -247,8 +247,8 @@ namespace GameOfLife
             int gridWidth = (int)LifeGrid.Width;
             int gridHeight = (int)LifeGrid.Height;
 
-            var maxRow = gridHeight / 20;
-            var maxCol = gridWidth / 20;
+            var maxRow = gridHeight / 5;
+            var maxCol = gridWidth / 5;
 
             int center = LifeGrid.Children.Count / 2+5;
             Cell cell1 = LifeGrid.Children[center] as Cell;
@@ -285,8 +285,8 @@ namespace GameOfLife
             int gridWidth = (int)LifeGrid.Width;
             int gridHeight = (int)LifeGrid.Height;
 
-            var maxRow = gridHeight / 20;
-            var maxCol = gridWidth / 20;
+            var maxRow = gridHeight / 5;
+            var maxCol = gridWidth / 5;
 
             int center = LifeGrid.Children.Count / 2 + 5;
 
@@ -313,8 +313,8 @@ namespace GameOfLife
             int gridWidth = (int)LifeGrid.Width;
             int gridHeight = (int)LifeGrid.Height;
 
-            var maxRow = gridHeight / 20;
-            var maxCol = gridWidth / 20;
+            var maxRow = gridHeight / 5;
+            var maxCol = gridWidth / 5;
 
             int center = LifeGrid.Children.Count / 2 + 5;
 
@@ -354,17 +354,17 @@ namespace GameOfLife
             LifeGrid.RowDefinitions.Clear();
             LifeGrid.ColumnDefinitions.Clear();
             LifeGrid.Children.Clear();
-            int gridWidth = System.Convert.ToInt32(heightBox.Text);
+            int gridWidth = System.Convert.ToInt32(widthBox.Text);
             int gridHeight = System.Convert.ToInt32(heightBox.Text);
 
-            for (int i = 0; i < gridHeight / 20; i++)
+            for (int i = 0; i < gridHeight / 5; i++)
             {
                 RowDefinition row = new RowDefinition();
                 LifeGrid.RowDefinitions.Add(row);
                
             }
 
-            for (int i = 0; i < gridWidth / 20; i++)
+            for (int i = 0; i < gridWidth / 5; i++)
             {
                 ColumnDefinition column = new ColumnDefinition();
                 LifeGrid.ColumnDefinitions.Add(column);
