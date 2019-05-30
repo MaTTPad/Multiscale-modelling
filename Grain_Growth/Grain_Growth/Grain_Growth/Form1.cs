@@ -17,6 +17,9 @@ namespace Grain_Growth
         Graphics graphics;
         int cellSize;
         Simulation simulation;
+        Random rand;
+        bool energized;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,13 +31,25 @@ namespace Grain_Growth
             graphics.Clear(Color.White);
             lifeBox.Image = bitmap;
             cellSize = 3;
+            energized = false;
             simulation = new Simulation(lifeBox.Height / cellSize, lifeBox.Width / cellSize, graphics, cellSize, lifeBox, bitmap);
-
+            this.rand = new Random();
         }
+        int counter = 0;
+
         private void timerTick(object sender, EventArgs e)
         {
+            counter++;
             simulation.nextStep();
             RefreshBitmap();
+
+            if (counter == 100) 
+            {
+                timer.Stop();
+                counter = 0;
+                MessageBox.Show("Generating finished.");
+            }
+           
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -178,6 +193,7 @@ namespace Grain_Growth
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
+            counter = 0;
             timer.Stop();
             simulation.clearAll();
             graphics.Clear(Color.White);
@@ -247,6 +263,7 @@ namespace Grain_Growth
                 }
                
             }
+            counter = 0;
         
         }
 
@@ -301,6 +318,78 @@ namespace Grain_Growth
         private void Label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MonteCarloButton_Click(object sender, EventArgs e)
+        {
+            int loopCount = System.Convert.ToInt32(iterationCountBox.Text);
+            double ktParam = System.Convert.ToDouble(ktParamBox.Text);
+
+            if(loopCount>100 || loopCount<1)
+            {
+                MessageBox.Show("Maksymalna ilość iteracji to 100, minimalna to 1.");
+                return;
+            }
+            else if (ktParam<0)
+            {
+                MessageBox.Show("Parametr k musi być większy od 0.");
+                return;
+            }
+
+
+            String neighborhood;
+            counter = 99 - loopCount;
+            simulation.setMethod("Monte Carlo");
+            if (vonNeumanButton.Checked)
+                neighborhood = "VonNeuman";
+            else if (MooreButton.Checked)
+                neighborhood = "Moore";
+            else if (hexagonalLeftButton.Checked)
+                neighborhood = "HexagonalLeft";
+            else if (hexagonalRightButton.Checked)
+                neighborhood = "HexagonalRight";
+            else if (hexagonalRandomButton.Checked)
+                neighborhood = "HexagonalRandom";
+            else if (pentagonalRandomButton.Checked)
+                neighborhood = "PentagonalRandom";
+            else //if (withRadiusButton.Checked)
+            {
+                MessageBox.Show("Wybierz sąsiedztwo!!!");
+                return;
+            }
+            simulation.setNeighborhood(neighborhood);
+            simulation.setKtParameter(ktParam);
+
+            if (timer.Enabled)
+                timer.Stop();
+            else
+                timer.Start();
+        }
+
+        private void EnergyButton_Click(object sender, EventArgs e)
+        {
+            simulation.setMethod("Energy");
+            if (energized == false)
+            {
+                counter = 98;
+                energized = true;
+                if (timer.Enabled)
+                    timer.Stop();
+                else
+                    timer.Start();
+            }
+            else
+            {
+                for(int i=0;i<simulation.rows;i++)
+                    for(int j=0;j<simulation.columns;j++)
+                    {
+                        graphics.FillRectangle(simulation.brushesList[simulation.currentState[i][j]], j * cellSize, i * cellSize, cellSize, cellSize);
+                    }
+
+                energized = false;
+                RefreshBitmap();
+
+            }
         }
     }
 }

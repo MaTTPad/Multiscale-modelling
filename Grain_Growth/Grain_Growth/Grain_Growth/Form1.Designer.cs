@@ -57,15 +57,21 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.withRadiusBox = new System.Windows.Forms.TextBox();
+            this.pentagonalRandomButton = new System.Windows.Forms.RadioButton();
+            this.withRadiusButton = new System.Windows.Forms.RadioButton();
+            this.hexagonalRandomButton = new System.Windows.Forms.RadioButton();
+            this.hexagonalRightButton = new System.Windows.Forms.RadioButton();
+            this.hexagonalLeftButton = new System.Windows.Forms.RadioButton();
             this.vonNeumanButton = new System.Windows.Forms.RadioButton();
             this.MooreButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.hexagonalLeftButton = new System.Windows.Forms.RadioButton();
-            this.hexagonalRightButton = new System.Windows.Forms.RadioButton();
-            this.hexagonalRandomButton = new System.Windows.Forms.RadioButton();
-            this.pentagonalRandomButton = new System.Windows.Forms.RadioButton();
-            this.withRadiusButton = new System.Windows.Forms.RadioButton();
-            this.withRadiusBox = new System.Windows.Forms.TextBox();
+            this.monteCarloButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.iterationCountBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.ktParamBox = new System.Windows.Forms.TextBox();
+            this.energyButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lifeBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -195,7 +201,7 @@
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(172, 556);
+            this.resetButton.Location = new System.Drawing.Point(152, 556);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 13;
@@ -333,6 +339,68 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Neighborhood";
             // 
+            // withRadiusBox
+            // 
+            this.withRadiusBox.Location = new System.Drawing.Point(150, 88);
+            this.withRadiusBox.Name = "withRadiusBox";
+            this.withRadiusBox.Size = new System.Drawing.Size(100, 20);
+            this.withRadiusBox.TabIndex = 31;
+            // 
+            // pentagonalRandomButton
+            // 
+            this.pentagonalRandomButton.AutoSize = true;
+            this.pentagonalRandomButton.Location = new System.Drawing.Point(151, 65);
+            this.pentagonalRandomButton.Name = "pentagonalRandomButton";
+            this.pentagonalRandomButton.Size = new System.Drawing.Size(117, 17);
+            this.pentagonalRandomButton.TabIndex = 15;
+            this.pentagonalRandomButton.TabStop = true;
+            this.pentagonalRandomButton.Text = "Pentagonal random";
+            this.pentagonalRandomButton.UseVisualStyleBackColor = true;
+            // 
+            // withRadiusButton
+            // 
+            this.withRadiusButton.AutoSize = true;
+            this.withRadiusButton.Location = new System.Drawing.Point(6, 88);
+            this.withRadiusButton.Name = "withRadiusButton";
+            this.withRadiusButton.Size = new System.Drawing.Size(78, 17);
+            this.withRadiusButton.TabIndex = 30;
+            this.withRadiusButton.TabStop = true;
+            this.withRadiusButton.Text = "With radius";
+            this.withRadiusButton.UseVisualStyleBackColor = true;
+            // 
+            // hexagonalRandomButton
+            // 
+            this.hexagonalRandomButton.AutoSize = true;
+            this.hexagonalRandomButton.Location = new System.Drawing.Point(6, 65);
+            this.hexagonalRandomButton.Name = "hexagonalRandomButton";
+            this.hexagonalRandomButton.Size = new System.Drawing.Size(114, 17);
+            this.hexagonalRandomButton.TabIndex = 14;
+            this.hexagonalRandomButton.TabStop = true;
+            this.hexagonalRandomButton.Text = "Hexagonal random";
+            this.hexagonalRandomButton.UseVisualStyleBackColor = true;
+            // 
+            // hexagonalRightButton
+            // 
+            this.hexagonalRightButton.AutoSize = true;
+            this.hexagonalRightButton.Location = new System.Drawing.Point(151, 42);
+            this.hexagonalRightButton.Name = "hexagonalRightButton";
+            this.hexagonalRightButton.Size = new System.Drawing.Size(99, 17);
+            this.hexagonalRightButton.TabIndex = 13;
+            this.hexagonalRightButton.TabStop = true;
+            this.hexagonalRightButton.Text = "Hexagonal right";
+            this.hexagonalRightButton.UseVisualStyleBackColor = true;
+            // 
+            // hexagonalLeftButton
+            // 
+            this.hexagonalLeftButton.AutoSize = true;
+            this.hexagonalLeftButton.Location = new System.Drawing.Point(6, 42);
+            this.hexagonalLeftButton.Name = "hexagonalLeftButton";
+            this.hexagonalLeftButton.Size = new System.Drawing.Size(93, 17);
+            this.hexagonalLeftButton.TabIndex = 12;
+            this.hexagonalLeftButton.TabStop = true;
+            this.hexagonalLeftButton.Text = "Hexagonal left";
+            this.hexagonalLeftButton.UseVisualStyleBackColor = true;
+            // 
             // vonNeumanButton
             // 
             this.vonNeumanButton.AutoSize = true;
@@ -364,73 +432,69 @@
             this.label1.TabIndex = 28;
             this.label1.Text = "Number of grains";
             // 
-            // hexagonalLeftButton
+            // monteCarloButton
             // 
-            this.hexagonalLeftButton.AutoSize = true;
-            this.hexagonalLeftButton.Location = new System.Drawing.Point(6, 42);
-            this.hexagonalLeftButton.Name = "hexagonalLeftButton";
-            this.hexagonalLeftButton.Size = new System.Drawing.Size(93, 17);
-            this.hexagonalLeftButton.TabIndex = 12;
-            this.hexagonalLeftButton.TabStop = true;
-            this.hexagonalLeftButton.Text = "Hexagonal left";
-            this.hexagonalLeftButton.UseVisualStyleBackColor = true;
+            this.monteCarloButton.Location = new System.Drawing.Point(591, 515);
+            this.monteCarloButton.Name = "monteCarloButton";
+            this.monteCarloButton.Size = new System.Drawing.Size(125, 46);
+            this.monteCarloButton.TabIndex = 29;
+            this.monteCarloButton.Text = "Monte Carlo";
+            this.monteCarloButton.UseVisualStyleBackColor = true;
+            this.monteCarloButton.Click += new System.EventHandler(this.MonteCarloButton_Click);
             // 
-            // hexagonalRightButton
+            // label9
             // 
-            this.hexagonalRightButton.AutoSize = true;
-            this.hexagonalRightButton.Location = new System.Drawing.Point(151, 42);
-            this.hexagonalRightButton.Name = "hexagonalRightButton";
-            this.hexagonalRightButton.Size = new System.Drawing.Size(99, 17);
-            this.hexagonalRightButton.TabIndex = 13;
-            this.hexagonalRightButton.TabStop = true;
-            this.hexagonalRightButton.Text = "Hexagonal right";
-            this.hexagonalRightButton.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(378, 519);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(101, 13);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Number of iterations";
             // 
-            // hexagonalRandomButton
+            // iterationCountBox
             // 
-            this.hexagonalRandomButton.AutoSize = true;
-            this.hexagonalRandomButton.Location = new System.Drawing.Point(6, 65);
-            this.hexagonalRandomButton.Name = "hexagonalRandomButton";
-            this.hexagonalRandomButton.Size = new System.Drawing.Size(114, 17);
-            this.hexagonalRandomButton.TabIndex = 14;
-            this.hexagonalRandomButton.TabStop = true;
-            this.hexagonalRandomButton.Text = "Hexagonal random";
-            this.hexagonalRandomButton.UseVisualStyleBackColor = true;
+            this.iterationCountBox.Location = new System.Drawing.Point(485, 515);
+            this.iterationCountBox.Name = "iterationCountBox";
+            this.iterationCountBox.Size = new System.Drawing.Size(100, 20);
+            this.iterationCountBox.TabIndex = 30;
             // 
-            // pentagonalRandomButton
+            // label10
             // 
-            this.pentagonalRandomButton.AutoSize = true;
-            this.pentagonalRandomButton.Location = new System.Drawing.Point(151, 65);
-            this.pentagonalRandomButton.Name = "pentagonalRandomButton";
-            this.pentagonalRandomButton.Size = new System.Drawing.Size(117, 17);
-            this.pentagonalRandomButton.TabIndex = 15;
-            this.pentagonalRandomButton.TabStop = true;
-            this.pentagonalRandomButton.Text = "Pentagonal random";
-            this.pentagonalRandomButton.UseVisualStyleBackColor = true;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(408, 544);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 13);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "KT parameter";
             // 
-            // withRadiusButton
+            // ktParamBox
             // 
-            this.withRadiusButton.AutoSize = true;
-            this.withRadiusButton.Location = new System.Drawing.Point(6, 88);
-            this.withRadiusButton.Name = "withRadiusButton";
-            this.withRadiusButton.Size = new System.Drawing.Size(78, 17);
-            this.withRadiusButton.TabIndex = 30;
-            this.withRadiusButton.TabStop = true;
-            this.withRadiusButton.Text = "With radius";
-            this.withRadiusButton.UseVisualStyleBackColor = true;
+            this.ktParamBox.Location = new System.Drawing.Point(485, 541);
+            this.ktParamBox.Name = "ktParamBox";
+            this.ktParamBox.Size = new System.Drawing.Size(100, 20);
+            this.ktParamBox.TabIndex = 32;
             // 
-            // withRadiusBox
+            // energyButton
             // 
-            this.withRadiusBox.Location = new System.Drawing.Point(150, 88);
-            this.withRadiusBox.Name = "withRadiusBox";
-            this.withRadiusBox.Size = new System.Drawing.Size(100, 20);
-            this.withRadiusBox.TabIndex = 31;
+            this.energyButton.Location = new System.Drawing.Point(722, 515);
+            this.energyButton.Name = "energyButton";
+            this.energyButton.Size = new System.Drawing.Size(125, 46);
+            this.energyButton.TabIndex = 34;
+            this.energyButton.Text = "Energia";
+            this.energyButton.UseVisualStyleBackColor = true;
+            this.energyButton.Click += new System.EventHandler(this.EnergyButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 586);
+            this.Controls.Add(this.energyButton);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.ktParamBox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.iterationCountBox);
+            this.Controls.Add(this.monteCarloButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label7);
@@ -511,6 +575,12 @@
         private System.Windows.Forms.RadioButton pentagonalRandomButton;
         private System.Windows.Forms.TextBox withRadiusBox;
         private System.Windows.Forms.RadioButton withRadiusButton;
+        private System.Windows.Forms.Button monteCarloButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox iterationCountBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox ktParamBox;
+        private System.Windows.Forms.Button energyButton;
     }
 }
 

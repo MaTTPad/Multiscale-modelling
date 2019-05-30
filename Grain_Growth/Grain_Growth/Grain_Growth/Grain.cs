@@ -22,7 +22,6 @@ namespace Grain_Growth
             this.state = state;
             centerOfGravityX = getRandomNumber(col * 3, col * 3 + 3);
             centerOfGravityY = getRandomNumber(row * 3, row * 3 + 3);
-            int lol = 0;
         }
 
         public double getRandomNumber(double minimum, double maximum)
