@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,13 @@ namespace Grain_Growth
         Simulation simulation;
         Random rand;
         bool energized;
+        double deltaTime = 0.001;
+        double startTime = 0;
+        double endTime = 0.2;
+        double A, B;
+        double criticalDislocation;
+        private List<double> dislocations;
+
 
         public Form1()
         {
@@ -34,9 +42,11 @@ namespace Grain_Growth
             energized = false;
             simulation = new Simulation(lifeBox.Height / cellSize, lifeBox.Width / cellSize, graphics, cellSize, lifeBox, bitmap);
             this.rand = new Random();
-        }
-        int counter = 0;
+            dislocations = new List<Double>();
 
+        }
+
+        int counter = 0;
         private void timerTick(object sender, EventArgs e)
         {
             counter++;
@@ -70,6 +80,11 @@ namespace Grain_Growth
         {
             timer.Stop();
             int grainsCount;
+            if(randomGrainsBox.Text =="")
+            {
+                MessageBox.Show("Wprowadziłeś błędną liczbę ziaren do wygenerowania.");
+                return;
+            }
             grainsCount = System.Convert.ToInt32(randomGrainsBox.Text);
             if (grainsCount < 1 || grainsCount>599)
             {
@@ -103,6 +118,11 @@ namespace Grain_Growth
             else if (withRadiusButton.Checked)
             {
                 method = "WithRadius";
+                if(System.Convert.ToInt32(withRadiusBox.Text)> System.Convert.ToInt32(radiusBox.Text)+30)
+                {
+                    MessageBox.Show("Błędna wartość promienia.");
+                    return;
+                }
                 simulation.setRadius(System.Convert.ToInt32(withRadiusBox.Text));
             }
 
@@ -205,6 +225,11 @@ namespace Grain_Growth
             timer.Stop();
             grainTypeCombo.Items.Clear();
             int noOfGrains;
+            if (noOfGrainsBox.Text == "")
+            {
+                MessageBox.Show("Wprowadziłeś błędną liczbę ziaren do wygenerowania.");
+                return;
+            }
             noOfGrains = System.Convert.ToInt32(noOfGrainsBox.Text);
             if (noOfGrains < 1 || noOfGrains>599)
             {
@@ -220,7 +245,7 @@ namespace Grain_Growth
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            int maxRadius = lifeBox.Width;
+            int maxRadius = lifeBox.Width / 2;
             int radius = Convert.ToInt32(radiusBox.Text);
 
             if (radius > maxRadius)
@@ -390,6 +415,235 @@ namespace Grain_Growth
                 RefreshBitmap();
 
             }
+        }
+
+        private void IterationCountBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        int iterationNumber = 0;
+
+        private void DrxButton_Click(object sender, EventArgs e)
+        {
+            A = System.Convert.ToDouble(aDrxLabel.Text);
+            B = System.Convert.ToDouble(bDrxLabel.Text);
+            criticalDislocation = System.Convert.ToDouble(criticalDislocationBox.Text);
+
+
+            String path = @"C:\Users\Mateusz\Desktop\Wieloskalowe\Grain_Growth\rekrystalizacja.txt";
+            double time = startTime;
+
+
+            StreamWriter streamWriter = new StreamWriter(path);
+            streamWriter.Write("{0,-30}", "Time");
+            streamWriter.Write("{0,-30}", "Ro");
+            streamWriter.Write("{0,-30}\n", "Delta Ro");
+            do
+            {
+                streamWriter.Write("{0,-30}", time);
+                calculateDislocations(time, streamWriter);
+                countAverageDislocation(time, streamWriter);
+                time += deltaTime;
+
+                iterationNumber++;
+                if (time > startTime + deltaTime)
+                {
+                    //rozrostDrx();
+
+                    RefreshBitmap();
+
+                }
+            } while (time <= endTime + deltaTime);
+
+            streamWriter.Close();
+        }
+
+        double dislocation;
+        double deltaDislocation;
+        double averageDislocationPerCell;
+        double dislocationPerCell;
+        double dislocationPackage;
+
+       private void drxNucleation()
+        {
+            for (int i = 0; i < simulation.rows; ++i)
+                for (int j = 0; j < simulation.columns; ++j)
+                {
+                    if (simulation.grains[i][j].dislocationDensity > criticalDislocation && simulation.grains[i][j].energy>0)
+                    {
+                        simulation.addDrxGrain(i, j);
+                        RefreshBitmap();
+                    }
+                }
+        }
+
+        private void rozrostDrx()
+        {
+            simulation.skrystalizowalWPOPRZEDNIM = simulation.skrystalizowalWOBECNYM;
+            simulation.clearCurrentStateDrx();
+
+            Parallel.For(0, simulation.rows, i =>
+            {
+
+                //for (int i = 0; i < simulation.rows; ++i)
+                //{
+                for (int j = 0; j < simulation.columns; ++j)
+                {
+                    simulation.drxGrowth(i, j);
+                    simulation.countEnergy(i, j);
+                }
+            }
+
+
+            );
+        }
+        private void calculateDislocations(double t, StreamWriter streamWriter)
+        {
+            dislocation = A / B + (1 - A / B) * Math.Exp(-B * t);
+            streamWriter.Write("{0,-30}", dislocation);
+            dislocations.Add(dislocation);
+        }
+
+        private void countAverageDislocation(double t, StreamWriter streamWriter)
+        {
+            if (t < startTime + deltaTime)
+            {
+                streamWriter.Write("{0,-30} \n", 0);
+                return;
+            }
+
+            deltaDislocation = dislocations[iterationNumber] - dislocations[iterationNumber-1];
+            streamWriter.Write("{0,-30} \n", deltaDislocation);
+            averageDislocationPerCell = deltaDislocation / (simulation.rows * simulation.columns);
+            dislocationPerCell = 0.3 * averageDislocationPerCell;
+            assignStartDislocation(dislocationPerCell);
+            asignRemainedDislocations(deltaDislocation - dislocationPerCell);
+        }
+
+        private void assignStartDislocation(double dislocationValue)
+        {
+            for (int i = 0; i < simulation.rows; ++i)
+                for (int j = 0; j < simulation.columns; ++j)
+                {
+                    simulation.grains[i][j].dislocationDensity += dislocationValue;
+                    if (simulation.grains[i][j].dislocationDensity > criticalDislocation && simulation.grains[i][j].energy > 0)
+                    {
+                        simulation.addDrxGrain(i, j);
+                        //simulation.skrystalizowalWPOPRZEDNIM[row][column] = 1;
+                    }
+                    //graphics.FillRectangle(new SolidBrush(Color.Black), j * cellSize + cellSize / 2, i * cellSize + cellSize / 2, cellSize / 2, cellSize / 2);
+                    //RefreshBitmap();
+                }
+        }
+
+        private void asignRemainedDislocations(double dislocationValue)
+        {
+            int row;
+            int column;
+            do
+            {
+                dislocationPackage = rand.NextDouble() * dislocationValue;
+                dislocationValue -= dislocationPackage;
+
+
+                int prob = rand.Next(0, 100);
+                if (prob <= 80)
+                {
+                    row = rand.Next(simulation.rows - 1);
+                    column = rand.Next(simulation.columns - 1);
+                    while(simulation.grains[row][column].energy < 1)
+                    {
+                        row = rand.Next(simulation.rows - 1);
+                        column = rand.Next(simulation.columns - 1);
+                    }
+
+
+                    simulation.grains[row][column].dislocationDensity += dislocationPackage;
+                    if (simulation.grains[row][column].dislocationDensity > criticalDislocation && simulation.grains[row][column].energy > 0)
+                    {
+                        simulation.addDrxGrain(row, column);
+                        //simulation.skrystalizowalWPOPRZEDNIM[row][column] = 1;
+                    }
+                }
+
+                else
+                {
+                    row = rand.Next(simulation.rows - 1);
+                    column = rand.Next(simulation.columns - 1);
+                    while (simulation.grains[row][column].energy !=0)
+                    {
+                        row = rand.Next(simulation.rows - 1);
+                        column = rand.Next(simulation.columns - 1);
+                    }
+
+                    simulation.grains[row][column].dislocationDensity += dislocationPackage;
+                }
+            }
+            while (dislocationValue > 0);
+
+        }
+
+        bool drxEnergized = false;
+        Bitmap oldBitmap=null;
+        private void DrxEnergy_Click(object sender, EventArgs e)
+        {
+            List<Brush> dislocBrushes = new List<Brush>();
+
+
+            Color randomColor = Color.FromArgb(0, 40, 0);
+
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 0, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 40, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 70, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 100, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 130, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 160, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 190, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 220, 0)));
+            dislocBrushes.Add(new SolidBrush(Color.FromArgb(0, 240, 0)));
+
+
+
+            if (drxEnergized == false)
+            {
+                drxEnergized = true;
+                if (oldBitmap == null)
+                    oldBitmap = new Bitmap(bitmap);
+
+                for (int i = 0; i < simulation.rows; ++i)
+                    for (int j = 0; j < simulation.columns; ++j)
+                    {
+                        if (simulation.grains[i][j].dislocationDensity > 1285317711.7)
+                            graphics.FillRectangle(dislocBrushes[8], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 2)
+                            graphics.FillRectangle(dislocBrushes[7], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 4)
+                            graphics.FillRectangle(dislocBrushes[6], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 8)
+                            graphics.FillRectangle(dislocBrushes[5], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 16)
+                            graphics.FillRectangle(dislocBrushes[4], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 32)
+                            graphics.FillRectangle(dislocBrushes[3], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else if (simulation.grains[i][j].dislocationDensity > 1285317711.7 / 64)
+                            graphics.FillRectangle(dislocBrushes[2], j * cellSize, i * cellSize, cellSize, cellSize);
+                        else
+                            graphics.FillRectangle(dislocBrushes[1], j * cellSize, i * cellSize, cellSize, cellSize);
+
+                        RefreshBitmap();
+                    }
+            }
+            else
+            {
+                lifeBox.Image = oldBitmap;
+                drxEnergized = false;
+            }
+        }
+
+        private void CriticalDislocationBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

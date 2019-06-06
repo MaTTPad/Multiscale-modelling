@@ -35,7 +35,6 @@
             this.randomGrainsBox = new System.Windows.Forms.TextBox();
             this.addRandomGrains = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.newHeightBox = new System.Windows.Forms.TextBox();
             this.newWidthBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -72,6 +71,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.ktParamBox = new System.Windows.Forms.TextBox();
             this.energyButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.bDrxLabel = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.aDrxLabel = new System.Windows.Forms.TextBox();
+            this.drxButton = new System.Windows.Forms.Button();
+            this.criticalDislocationBox = new System.Windows.Forms.TextBox();
+            this.drxEnergy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lifeBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -81,7 +87,7 @@
             // 
             this.lifeBox.Location = new System.Drawing.Point(321, 12);
             this.lifeBox.Name = "lifeBox";
-            this.lifeBox.Size = new System.Drawing.Size(600, 494);
+            this.lifeBox.Size = new System.Drawing.Size(600, 492);
             this.lifeBox.TabIndex = 0;
             this.lifeBox.TabStop = false;
             this.lifeBox.Click += new System.EventHandler(this.PictureBox1_Click);
@@ -137,10 +143,6 @@
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.StartButton_Click);
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker1_DoWork);
             // 
             // newHeightBox
             // 
@@ -434,9 +436,9 @@
             // 
             // monteCarloButton
             // 
-            this.monteCarloButton.Location = new System.Drawing.Point(591, 515);
+            this.monteCarloButton.Location = new System.Drawing.Point(536, 515);
             this.monteCarloButton.Name = "monteCarloButton";
-            this.monteCarloButton.Size = new System.Drawing.Size(125, 46);
+            this.monteCarloButton.Size = new System.Drawing.Size(125, 20);
             this.monteCarloButton.TabIndex = 29;
             this.monteCarloButton.Text = "Monte Carlo";
             this.monteCarloButton.UseVisualStyleBackColor = true;
@@ -445,7 +447,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(378, 519);
+            this.label9.Location = new System.Drawing.Point(323, 519);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 13);
             this.label9.TabIndex = 31;
@@ -453,15 +455,16 @@
             // 
             // iterationCountBox
             // 
-            this.iterationCountBox.Location = new System.Drawing.Point(485, 515);
+            this.iterationCountBox.Location = new System.Drawing.Point(430, 515);
             this.iterationCountBox.Name = "iterationCountBox";
             this.iterationCountBox.Size = new System.Drawing.Size(100, 20);
             this.iterationCountBox.TabIndex = 30;
+            this.iterationCountBox.TextChanged += new System.EventHandler(this.IterationCountBox_TextChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(408, 544);
+            this.label10.Location = new System.Drawing.Point(353, 544);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(71, 13);
             this.label10.TabIndex = 33;
@@ -469,26 +472,96 @@
             // 
             // ktParamBox
             // 
-            this.ktParamBox.Location = new System.Drawing.Point(485, 541);
+            this.ktParamBox.Location = new System.Drawing.Point(430, 541);
             this.ktParamBox.Name = "ktParamBox";
             this.ktParamBox.Size = new System.Drawing.Size(100, 20);
             this.ktParamBox.TabIndex = 32;
             // 
             // energyButton
             // 
-            this.energyButton.Location = new System.Drawing.Point(722, 515);
+            this.energyButton.Location = new System.Drawing.Point(536, 544);
             this.energyButton.Name = "energyButton";
-            this.energyButton.Size = new System.Drawing.Size(125, 46);
+            this.energyButton.Size = new System.Drawing.Size(125, 20);
             this.energyButton.TabIndex = 34;
-            this.energyButton.Text = "Energia";
+            this.energyButton.Text = "Energy";
             this.energyButton.UseVisualStyleBackColor = true;
             this.energyButton.Click += new System.EventHandler(this.EnergyButton_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(675, 548);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(14, 13);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "B";
+            // 
+            // bDrxLabel
+            // 
+            this.bDrxLabel.Location = new System.Drawing.Point(695, 544);
+            this.bDrxLabel.Name = "bDrxLabel";
+            this.bDrxLabel.Size = new System.Drawing.Size(100, 20);
+            this.bDrxLabel.TabIndex = 38;
+            this.bDrxLabel.Text = "9,41268203527779";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(675, 522);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(14, 13);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "A";
+            // 
+            // aDrxLabel
+            // 
+            this.aDrxLabel.Location = new System.Drawing.Point(695, 518);
+            this.aDrxLabel.Name = "aDrxLabel";
+            this.aDrxLabel.Size = new System.Drawing.Size(100, 20);
+            this.aDrxLabel.TabIndex = 36;
+            this.aDrxLabel.Text = "86710969050178,5";
+            // 
+            // drxButton
+            // 
+            this.drxButton.Location = new System.Drawing.Point(801, 544);
+            this.drxButton.Name = "drxButton";
+            this.drxButton.Size = new System.Drawing.Size(125, 20);
+            this.drxButton.TabIndex = 35;
+            this.drxButton.Text = "DRX";
+            this.drxButton.UseVisualStyleBackColor = true;
+            this.drxButton.Click += new System.EventHandler(this.DrxButton_Click);
+            // 
+            // criticalDislocationBox
+            // 
+            this.criticalDislocationBox.Location = new System.Drawing.Point(801, 518);
+            this.criticalDislocationBox.Name = "criticalDislocationBox";
+            this.criticalDislocationBox.Size = new System.Drawing.Size(125, 20);
+            this.criticalDislocationBox.TabIndex = 40;
+            this.criticalDislocationBox.Text = "1285317711,7";
+            this.criticalDislocationBox.TextChanged += new System.EventHandler(this.CriticalDislocationBox_TextChanged);
+            // 
+            // drxEnergy
+            // 
+            this.drxEnergy.Location = new System.Drawing.Point(801, 570);
+            this.drxEnergy.Name = "drxEnergy";
+            this.drxEnergy.Size = new System.Drawing.Size(125, 20);
+            this.drxEnergy.TabIndex = 41;
+            this.drxEnergy.Text = "Energy";
+            this.drxEnergy.UseVisualStyleBackColor = true;
+            this.drxEnergy.Click += new System.EventHandler(this.DrxEnergy_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 586);
+            this.ClientSize = new System.Drawing.Size(933, 597);
+            this.Controls.Add(this.drxEnergy);
+            this.Controls.Add(this.criticalDislocationBox);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.bDrxLabel);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.aDrxLabel);
+            this.Controls.Add(this.drxButton);
             this.Controls.Add(this.energyButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ktParamBox);
@@ -544,7 +617,6 @@
         private System.Windows.Forms.TextBox randomGrainsBox;
         private System.Windows.Forms.Button addRandomGrains;
         private System.Windows.Forms.Button startButton;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox newHeightBox;
         private System.Windows.Forms.TextBox newWidthBox;
         private System.Windows.Forms.Button button2;
@@ -581,6 +653,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox ktParamBox;
         private System.Windows.Forms.Button energyButton;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox bDrxLabel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox aDrxLabel;
+        private System.Windows.Forms.Button drxButton;
+        private System.Windows.Forms.TextBox criticalDislocationBox;
+        private System.Windows.Forms.Button drxEnergy;
     }
 }
 
